@@ -46,4 +46,4 @@ class NewsArticle:
                 "Authors": self.Authors,
                 "Publish_Date": self.Publish_Date,
                 "Retieval_Date": self.Retieval_Date,
-                "UID": self.UID}
+                "_id": self.UID}

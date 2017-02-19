@@ -18,20 +18,20 @@ def get_articles_from(srcs):
     papers = []
     print("Startup, "+str(len(srcs))+" papers to build, download and parse.")
     for s in srcs:
-        papers.append(newspaper.build(s))
+        papers.append(newspaper.build(s,memoize_articles=False))
         print(papers[len(papers)-1].domain+" has " +str(papers[len(papers)-1].size())+" new articles")
-    news_pool.set(papers, threads_per_source=2)
-    news_pool.join()
     for p in papers:
         if p.size() > 0:
             for art in p.articles:
-                try:
-                    if art.is_downloaded and art.:
-                        art.parse()
-                        if art.is_parsed:
-                            art.nlp()
-                            na = NewsArticle(art)
-                            loop.run_until_complete(do_insert(db[newssource.domain],na.GetMongoDocument()))
-                    print('.',end="",flush=True)
-                except Exception:
-                    print('PE',end="")
+                art.download()
+                if art.is_downloaded:
+                    art.parse()
+                    if art.is_parsed:
+                        art.nlp()
+                        na = NewsArticle(art)
+                        loop.run_until_complete(do_insert(db[p.domain],na.GetMongoDocument()))
+                        print('.',end="",flush=True)
+                    else:
+                        print(',',end="",flush=True)
+                else:
+                    print('*',end="",flush=True)
