@@ -11,18 +11,23 @@ db = mongoclient.newsdb
 loop = asyncio.get_event_loop()
 
 async def do_insert(col,doc):
-    await col.insert_one(doc)
+    sz = await col.find({"URL":doc['URL']}).count()
+    if sz == 0:
+        await col.insert_one(doc)
+    else:
+        print('B',end="")
+    
 
 
-def get_articles_from(srcs):
+def get_articles_from(srcs,memoize=True):
     papers = []
     print("Startup, "+str(len(srcs))+" papers to build, download and parse.")
     for s in srcs:
-        papers.append(newspaper.build(s,memoize_articles=False))
-        print(papers[len(papers)-1].domain+" has " +str(papers[len(papers)-1].size())+" new articles")
-    for p in papers:
+        p = newspaper.build(s,memoize_articles=memoize)
+        print(p.domain+" has " +str(p.size())+" new articles")
         if p.size() > 0:
-            for art in p.articles:
+            for i in range(0,p.size()):
+                art = p.articles[0]
                 art.download()
                 if art.is_downloaded:
                     art.parse()
@@ -35,3 +40,4 @@ def get_articles_from(srcs):
                         print(',',end="",flush=True)
                 else:
                     print('*',end="",flush=True)
+                del p.articles[0]

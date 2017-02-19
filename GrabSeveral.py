@@ -1,5 +1,6 @@
 import newsgrabber
 paper_list = [
+    'http://cnn.com/',
     'http://www.wsj.com/',
     'http://www.nytimes.com/',
     'http://www.usatoday.com/',
@@ -27,4 +28,4 @@ paper_list = [
     'http://www.bostonglobe.com/'
 ]
 
-newsgrabber.get_articles_from(paper_list)
+newsgrabber.get_articles_from(paper_list,False)
