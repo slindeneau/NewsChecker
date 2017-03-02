@@ -25,7 +25,34 @@ paper_list = [
     'http://www.staradvertiser.com/',
     'http://www.reviewjournal.com/',
     'http://www.sandiegouniontribune.com/',
-    'http://www.bostonglobe.com/'
+    'http://www.bostonglobe.com/',
+    'http://www.yahoo.com/news',
+    'http://news.google.com/',
+    'http://www.huffingtonpost.com/',
+    'http://www.foxnews.com/',
+    'http://www.nbcnews.com/',
+    'http://www.dailymail.co.uk/',
+    'http://www.theguardian.com/us',
+    'http://www.latimes.com/',
+    'http://abcnews.go.com/',
+    'http://www.bbc.com/news',
+    'http://theintercept.com/',
+    'http://qz.com/',
+    'http://time.com/',
+    'http://www.theweek.com/',
+    'http://mic.com/',
+    'http://www.cbsnews.com/',
+    'http://www.theonion.com/',
+    'http://forbes.com',
+    'http://www.indiatimes.com/',
+    'http://bloomberg.com',
+    'http://reuters.com',
+    'http://cnbc.com',
+    'http://indianexpress.com',
+    'http://thehill.com',
+    'http://theatlantic.com',
+    'http://thehindu.com',
+    'http://cbc.ca/news'
 ]
 
-newsgrabber.get_articles_from(paper_list,False)
+newsgrabber.get_articles_from(paper_list,True,2)
